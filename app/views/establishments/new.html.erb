@@ -1,0 +1,13 @@
+<div>criar um estabelecimento</div>
+
+<%= simple_form_for @establishment do |f| %>
+  <%= f.input :fantasy_name %>
+  <%= f.input :email %>
+  <%= f.input :observation_content %>
+  <%= f.input :whatsapp %>
+  <%= f.input :city %>
+  <%= f.input :neighborhood %>
+  <%= f.input :street %>
+  <%= f.input :number %>
+  <%= f.button :submit, "Criar estabelecimento", class: 'btn btn-primary' %>
+<% end %>

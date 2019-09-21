@@ -1,0 +1,14 @@
+<div>olá</div>
+<%= link_to 'criar estabelecimento', new_establishment_path %>
+<div>
+  <% @establishments.each do |e| %>
+    <div>
+      <span><strong>id: </strong><%= e.id %></span>
+      <span><strong>nome fantasia: </strong><%= e.fantasy_name %></span>
+      <span><strong>whatsapps: </strong><%= e.whatsapps.last.number rescue nil %></span>
+      <%= link_to 'editar estabelecimento', edit_establishment_path(e) %>
+    </div>
+  <% end %>
+</div>
+
+

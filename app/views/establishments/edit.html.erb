@@ -1,0 +1,12 @@
+<div>Editar <%= @establishment.fantasy_name %></div>
+<%= simple_form_for @establishment do |f| %>
+  <%= f.input :fantasy_name, input_html: { value: (@establishment.fantasy_name rescue nil) } %>
+  <%= f.input :email, input_html: { value: (@establishment.emails.last.email rescue nil) } %>
+  <%= f.input :observation_content, input_html: { value: (@establishment.observations.last.content rescue nil)} %>
+  <%= f.input :whatsapp, input_html: { value: (@establishment.whatsapps.last.number rescue nil ) } %>
+  <%= f.input :city, input_html: { value: (@establishment.addresses.last.city rescue nil )} %>
+  <%= f.input :neighborhood, input_html: { value: (@establishment.addresses.last.neighborhood rescue nil ) } %>
+  <%= f.input :street, input_html: { value: (@establishment.addresses.last.street rescue nil ) } %>
+  <%= f.input :number, input_html: { value: (@establishment.addresses.last.number rescue nil ) } %>
+  <%= f.button :submit, "Criar estabelecimento", class: 'btn btn-primary' %>
+<% end %>
