@@ -10,10 +10,57 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_21_171325) do
+ActiveRecord::Schema.define(version: 2019_09_21_171812) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "addresses", force: :cascade do |t|
+    t.string "street"
+    t.string "neighborhood"
+    t.integer "number"
+    t.string "city"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "emails", force: :cascade do |t|
+    t.bigint "establishment_id"
+    t.string "email"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["establishment_id"], name: "index_emails_on_establishment_id"
+  end
+
+  create_table "establishments", force: :cascade do |t|
+    t.string "fantasy_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "observations", force: :cascade do |t|
+    t.bigint "establishment_id"
+    t.string "content"
+    t.bigint "step_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["establishment_id"], name: "index_observations_on_establishment_id"
+    t.index ["step_id"], name: "index_observations_on_step_id"
+  end
+
+  create_table "phones", force: :cascade do |t|
+    t.bigint "establishment_id"
+    t.string "number"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["establishment_id"], name: "index_phones_on_establishment_id"
+  end
+
+  create_table "steps", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -27,4 +74,17 @@ ActiveRecord::Schema.define(version: 2019_09_21_171325) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "whatsapps", force: :cascade do |t|
+    t.bigint "establishment_id"
+    t.string "number"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["establishment_id"], name: "index_whatsapps_on_establishment_id"
+  end
+
+  add_foreign_key "emails", "establishments"
+  add_foreign_key "observations", "establishments"
+  add_foreign_key "observations", "steps"
+  add_foreign_key "phones", "establishments"
+  add_foreign_key "whatsapps", "establishments"
 end
