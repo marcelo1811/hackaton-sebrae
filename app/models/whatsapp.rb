@@ -1,3 +1,3 @@
 class Whatsapp < ApplicationRecord
-  belongs_to :establishment_id
+  belongs_to :establishment
 end
