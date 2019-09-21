@@ -1,14 +1,78 @@
-<div>olá</div>
-<%= link_to 'criar estabelecimento', new_establishment_path %>
-<div>
-  <% @establishments.each do |e| %>
-    <div>
-      <span><strong>id: </strong><%= e.id %></span>
-      <span><strong>nome fantasia: </strong><%= e.fantasy_name %></span>
-      <span><strong>whatsapps: </strong><%= e.whatsapps.last.number rescue nil %></span>
-      <%= link_to 'editar estabelecimento', edit_establishment_path(e) %>
+<style type="text/css">
+  .btn-circle {
+    width: 30px;
+    height: 30px;
+    padding: 6px 0px;
+    border-radius: 15px;
+    text-align: center;
+    font-size: 12px;
+    line-height: 1.42857;
+  }
+
+  .btn-icon {
+    line-height: 0.7;
+  }
+</style>
+
+<body>
+  <div class="container ">
+    <div class="container">
+      <div class="row">
+        <input type="text" style="width: calc(20% - 15px); margin-right: 15px" class="form-control" id="name-filter"
+          placeholder="Filtro de nome" />
+        <input type="text" style="width: calc(20% - 15px); margin-right: 15px" class="form-control" id="name-filter"
+          placeholder="Filtro de bairro" />
+        <input type="text" style="width: calc(20% - 15px); margin-right: 15px" class="form-control" id="name-filter"
+          placeholder="Filtro de cidade" />
+        <input type="text" style="width: calc(20% - 15px); margin-right: 15px" class="form-control" id="name-filter"
+          placeholder="Filtro de e-mail" />
+        <div class="dropdown" style="width: 15%">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            Filtro de nível
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="#">1</a>
+            <a class="dropdown-item" href="#">2</a>
+            <a class="dropdown-item" href="#">3</a>
+            <a class="dropdown-item" href="#">4</a>
+            <a class="dropdown-item" href="#">5</a>
+          </div>
+        </div>
+        <%= link_to new_establishment_path do %>
+        <button type="button" class="btn btn-warning btn-circle btn-lg" data-toggle="tooltip" data-placement="top"
+          title="Adicionar Estabelecimento">
+          <i class="material-icons btn-icon">add</i>
+        </button>
+        <% end %>
+      </div>
     </div>
-  <% end %>
-</div>
 
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Nome Fantasia</th>
+          <th scope="col">Tipo</th>
+          <th scope="col">Rua</th>
+          <th scope="col">Número</th>
+          <th scope="col">Bairro</th>
+          <th scope="col">Cidade</th>
+          <th scope="col">Fone</th>
+          <th scope="col">E-mail</th>
+          <th scope="col">Whatsapp</th>
+          <th scope="col">Nível</th>
+          <th scope="col">Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= render partial: "establishment", collection: @establishments %>
+      </tbody>
+    </table>
+  </div>
 
+</body>
+<script>
+  $('[data-toggle="tooltip"]').tooltip()
+</script>
+
+</html>

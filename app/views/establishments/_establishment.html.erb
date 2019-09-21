@@ -1,0 +1,31 @@
+<tr>
+  <td><%= establishment_fantasy_name(establishment) %></td>
+  <td>Pizzaria</td>
+  <td><%= establishment_address_street(establishment) %></td>
+  <td><%= establishment_address_number(establishment) %></td>
+  <td><%= establishment_address_street(establishment) %></td>
+  <td><%= establishment_address_city(establishment) %></td>
+  <td><%= establishment_phone_number(establishment) %></td>
+  <td><%= establishment_email(establishment) %></td>
+  <td><%= establishment_whatsapp(establishment) %></td>
+  <td>
+    <i class="material-icons">stars</i>
+    <i class="material-icons">stars</i>
+    <i class="material-icons">stars</i>
+  </td>
+  <td>
+    <button type="button" class="btn btn-primary btn-circle" data-toggle="tooltip" data-placement="top"
+    title="Histórico">
+      <i class="material-icons btn-icon">history</i>
+    </button>
+    <button type="button" class="btn btn-primary btn-circle" data-toggle="tooltip" data-placement="top"
+    title="Observações">
+      <i class="material-icons btn-icon">comment</i>
+    </button>
+    <button type="button" class="btn btn-primary btn-circle" data-toggle="tooltip" data-placement="top"
+    title="Editar">
+    <%= link_to edit_establishment_path(establishment) do %>
+      <i class="material-icons btn-icon text-white">edit</i>
+    <% end %>
+  </td>
+</tr>

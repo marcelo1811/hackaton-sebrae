@@ -6,11 +6,11 @@ class Establishment < ApplicationRecord
   attr_accessor :city
   attr_accessor :neighborhood
   attr_accessor :street
-  attr_accessor :number
+  attr_accessor :address_number
 
   has_many :whatsapps
   has_many :observations
-  has_many :phone
+  has_many :phones
   has_many :addresses
   has_many :emails
 end
