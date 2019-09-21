@@ -55,6 +55,7 @@ class EstablishmentsController < ApplicationController
   private
 
   def establishment_params
+    return if params[:establishment].blank?
     params.require(:establishment).permit(:fantasy_name,
                                           :email,
                                           :observation_content,
@@ -73,6 +74,7 @@ class EstablishmentsController < ApplicationController
   end
 
   def set_params
+    return if params[:establishment].blank?
     @fantasy_name = establishment_params[:fantasy_name]
     @email = establishment_params[:email]
     @content = establishment_params[:observation_content]
