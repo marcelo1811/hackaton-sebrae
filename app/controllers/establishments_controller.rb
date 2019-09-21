@@ -1,9 +1,14 @@
 class EstablishmentsController < ApplicationController
   before_action :set_establishment, only: [:show, :edit, :update]
-  before_action :set_params, only: [:update, :create]
+  before_action :set_params, only: [:update, :create, :index]
 
   def index
     @establishments = Establishment.all
+    filter_by_fantasy_name if @fantasy_name.present?
+    filter_by_neighborhood if @address_neighborhood.present?
+    filter_by_email if @email.present?
+    filter_by_city if @address_city.present?
+    # filter_by_step
   end
 
   def new
@@ -58,7 +63,8 @@ class EstablishmentsController < ApplicationController
                                           :city,
                                           :neighborhood,
                                           :street,
-                                          :address_number
+                                          :address_number,
+                                          :step
                                          )
   end
 
@@ -85,5 +91,21 @@ class EstablishmentsController < ApplicationController
     return true if @establishment.addresses.last.neighborhood != @address_neighborhood
     return true if @establishment.addresses.last.number != @addresses_number
     false
+  end
+
+  def filter_by_fantasy_name
+    @establishments = @establishments.where('establishments.fantasy_name LIKE ?', "%#{@fantasy_name}%")
+  end
+
+  def filter_by_neighborhood
+    @establishments = @establishments.joins(:addresses).where('addresses.neighborhood LIKE ?', "%#{@address_neighborhood}%").group(:id)
+  end
+
+  def filter_by_email
+    @establishments = @establishments.joins(:emails).where('emails.email LIKE ?', "%#{@email}%").group(:id)
+  end
+
+  def filter_by_city
+    @establishments = @establishments.joins(:addresses).where('addresses.city LIKE ?', "%#{@address_city}%").group(:id)
   end
 end

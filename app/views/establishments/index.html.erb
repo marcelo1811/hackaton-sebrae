@@ -18,33 +18,24 @@
   <div class="container ">
     <div class="container">
       <div class="row">
-        <input type="text" style="width: calc(20% - 15px); margin-right: 15px" class="form-control" id="name-filter"
-          placeholder="Filtro de nome" />
-        <input type="text" style="width: calc(20% - 15px); margin-right: 15px" class="form-control" id="name-filter"
-          placeholder="Filtro de bairro" />
-        <input type="text" style="width: calc(20% - 15px); margin-right: 15px" class="form-control" id="name-filter"
-          placeholder="Filtro de cidade" />
-        <input type="text" style="width: calc(20% - 15px); margin-right: 15px" class="form-control" id="name-filter"
-          placeholder="Filtro de e-mail" />
-        <div class="dropdown" style="width: 15%">
-          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
-            Filtro de nível
-          </button>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="#">1</a>
-            <a class="dropdown-item" href="#">2</a>
-            <a class="dropdown-item" href="#">3</a>
-            <a class="dropdown-item" href="#">4</a>
-            <a class="dropdown-item" href="#">5</a>
+        <%= simple_form_for(Establishment.new, method: :get, url: establishments_path) do |f| %>
+          <div class="form-row">
+            <%= f.input :fantasy_name, placeholder: 'Filtro de nome', label: false, input_html: { value: @fantasy_name } %>
+            <%= f.input :neighborhood, placeholder: 'Filtro de bairro', label: false, input_html: { value: @address_neighborhood } %>
+            <%= f.input :city, placeholder: 'Filtro de cidade', label: false, input_html: { value: @address_city } %>
+            <%= f.input :email, placeholder: 'Filtro de email', label: false, input_html: { value: @email } %>
+            <%= f.input :step, label: false, collection: Step.all, prompt: 'Filtro de nível' %>
+            <%= f.button :submit, style: 'display: none' %>
           </div>
-        </div>
-        <%= link_to new_establishment_path do %>
-        <button type="button" class="btn btn-warning btn-circle btn-lg" data-toggle="tooltip" data-placement="top"
-          title="Adicionar Estabelecimento">
-          <i class="material-icons btn-icon">add</i>
-        </button>
         <% end %>
+        <div style="margin-left: 30px">
+          <%= link_to new_establishment_path do %>
+          <button type="button" class="btn btn-warning btn-circle btn-lg" data-toggle="tooltip" data-placement="top"
+            title="Adicionar Estabelecimento">
+            <i class="material-icons btn-icon">add</i>
+          </button>
+          <% end %>
+        </div>
       </div>
     </div>
 
