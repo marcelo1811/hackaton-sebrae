@@ -64,8 +64,10 @@ class EstablishmentsController < ApplicationController
     sheet = sheet.parse(headers: true, clean: true)
     header = sheet.shift
     sheet.each do |row|
+      next if Establishment.find_by(cpf_cnpj: row['CPF_CNPJ']).present?
       establishment = Establishment.create!
       establishment.fantasy_name = row['Nome Fantasia']
+      establishment.cpf_cnpj = row['CPF_CNPJ']
       establishment.emails.create(email: row['Email'])
       establishment.observations.create(content: 'Importado da planilha')
       establishment.whatsapps.create(number: row['Celular'])
@@ -73,7 +75,11 @@ class EstablishmentsController < ApplicationController
       establishment.addresses.create(city: row['Cidade'],
                                      neighborhood: row['Bairro'],
                                      street: row['Endereço'],
-                                     number: row['Número']
+                                     number: row['Número'],
+                                     latitude: row['Latitude'],
+                                     longitude: row['Longitude'],
+                                     state: row['UF'],
+                                     zip: row['CEP']
                                     )
       establishment.save!
     end

@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(version: 2019_09_22_050526) do
     t.string "fantasy_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "cnpj"
+    t.string "cpf_cnpj"
   end
 
   create_table "observations", force: :cascade do |t|
