@@ -3,11 +3,17 @@ class EstablishmentsController < ApplicationController
   before_action :set_params, only: [:update, :create, :index]
 
   def index
-    @establishments = Establishment.all.first(100)
+    current_page = params[:page].present? ? params[:page].to_i : 1
+    @pages = current_page.upto(current_page + 10).to_a
+
+    @establishments = Establishment.all
+    @total_count = @establishments.length
     filter_by_fantasy_name if @fantasy_name.present?
     filter_by_neighborhood if @address_neighborhood.present?
     filter_by_email if @email.present?
     filter_by_city if @address_city.present?
+    @results_count = @establishments.length
+    @establishments = @establishments.page(current_page)
     # filter_by_step
   end
 

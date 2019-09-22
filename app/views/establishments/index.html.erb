@@ -43,7 +43,7 @@
         </div>
       </div>
     </div>
-
+    <div>exibindo <%= @results_count %> de <%= @total_count %></div>
     <table class="table table-striped">
       <thead>
         <tr>
@@ -66,6 +66,9 @@
     </table>
   </div>
 
+  <% @pages.each do |page| %>
+    <%= link_to page, establishments_path(page: page) %>
+  <% end %>
 </body>
 <script>
   $('[data-toggle="tooltip"]').tooltip()

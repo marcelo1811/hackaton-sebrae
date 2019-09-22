@@ -19,6 +19,9 @@ gem 'webpacker'
 # Roo provides an interface to spreadsheets of several sorts.
 gem "roo", "~> 2.8.0"
 
+# A Scope & Engine based, clean, powerful, customizable and sophisticated paginator for Ruby webapps https://github.com/amatsuda/kaminari/…
+gem 'kaminari'
+
 group :development do
   gem 'web-console', '>= 3.3.0'
 end

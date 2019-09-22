@@ -1,4 +1,7 @@
 class Establishment < ApplicationRecord
+  # kaminari
+  paginates_per 15
+
   attr_accessor :whatsapp
   attr_accessor :observation_content
   attr_accessor :step
