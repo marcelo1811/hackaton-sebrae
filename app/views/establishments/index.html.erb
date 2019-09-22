@@ -152,12 +152,13 @@
                 <% end %>
             </div>
         </form>
-        <form style="padding: 12px">
-            <button type="button" class="btn btn-circle btn-lg ze-big-balls" data-toggle="tooltip" data-placement="top"
-                title="Importar">
-                <i class="material-icons btn-icon icon-of-big-balls">save_alt</i>
-            </button>
-        </form>
+
+        <%= simple_form_for(Establishment.new, method: :post, url: establishments_import_csv_path, html: {multipart: true}) do |f| %>
+            <input type="file" name="establishment[file]" accept="application/xlsx">
+            <%= button_tag(type: 'submit', class: "btn btn-circle btn-lg ze-big-balls") do %>
+              <i class="material-icons btn-icon icon-of-big-balls">save_alt</i>
+            <% end %>
+          <% end %>
         <div class="table-responsive">
             <table class="table table-striped">
                 <thead>
