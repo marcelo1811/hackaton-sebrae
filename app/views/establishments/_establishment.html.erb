@@ -1,4 +1,5 @@
 <tr>
+  <td>1234123</td>
   <td><%= establishment_fantasy_name(establishment) %></td>
   <td>Pizzaria</td>
   <td><%= establishment_address_street(establishment) %></td>
@@ -22,10 +23,8 @@
     title="Observações">
       <i class="material-icons btn-icon">comment</i>
     </button>
-    <button type="button" class="btn btn-primary btn-circle" data-toggle="tooltip" data-placement="top"
-    title="Editar">
     <%= link_to edit_establishment_path(establishment) do %>
-      <i class="material-icons btn-icon text-white">edit</i>
+      <i class="material-icons btn-icon text-dark">edit</i>
     <% end %>
   </td>
 </tr>
