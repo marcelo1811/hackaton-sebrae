@@ -37,10 +37,10 @@ class EstablishmentsController < ApplicationController
   end
 
   def show
-    whatsapps = @establishment.whatsapps.order(:created_at)
-    phones = @establishment.phones.order(:created_at)
-    address = @establishment.addresses.order(:created_at)
-    email = @establishment.emails.order(:created_at)
+    whatsapps = @establishment.whatsapps.order(:created_at) if @establishment.whatsapps.present?
+    phones = @establishment.phones.order(:created_at) if @establishment.phones.present?
+    address = @establishment.addresses.order(:created_at) if @establishment.addresses.present?
+    email = @establishment.emails.order(:created_at) if @establishment.emails.present?
 
     @resources = []
     @resources << whatsapps
