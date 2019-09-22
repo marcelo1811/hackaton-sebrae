@@ -12,6 +12,7 @@ class EstablishmentsController < ApplicationController
     filter_by_neighborhood if @address_neighborhood.present?
     filter_by_email if @email.present?
     filter_by_city if @address_city.present?
+    filter_by_cpf_cnpj if @cpf_cnpj.present?
     @results_count = @establishments.length
     @establishments = @establishments.page(current_page)
   end
@@ -117,7 +118,8 @@ class EstablishmentsController < ApplicationController
                                           :street,
                                           :address_number,
                                           :step,
-                                          :file
+                                          :file,
+                                          :cpf_cnpj
                                          )
   end
 
@@ -136,6 +138,7 @@ class EstablishmentsController < ApplicationController
     @address_neighborhood = establishment_params[:neighborhood]
     @address_street = establishment_params[:street]
     @address_number = establishment_params[:address_number]
+    @cpf_cnpj = establishment_params[:cpf_cnpj]
   end
 
   def update_address?
@@ -161,5 +164,9 @@ class EstablishmentsController < ApplicationController
 
   def filter_by_city
     @establishments = @establishments.joins(:addresses).where('addresses.city ILIKE ?', "%#{@address_city}%").group(:id)
+  end
+
+  def filter_by_cpf_cnpj
+    @establishments = @establishments.where('establishments.cpf_cnpj ILIKE ?', "%#{@cpf_cnpj}%").group(:id)
   end
 end

@@ -1,16 +1,4 @@
-<tr>
-  <td><%= beaty_date(resource.created_at) %></td>
-  <td><%= object_name(resource) %></td>
-  <td><strike><%= object_from(resource) %></strike></td>
-  <td><%= object_to(resource) %></td>
-  <td>
-    <button type="button" class="btn btn-circle" data-toggle="modal"
-        data-target="#observation-modal" title="Observações">
-        <i class="material-icons btn-icon">rate_review</i>
-    </button>
-  </td>
-</tr>
-
+<!-- Modal -->
 <div class="modal fade" id="observation-modal" tabindex="-1" role="dialog" aria-labelledby="observation-title"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -25,10 +13,10 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col">
-                            Nome Fantasia
+                            Pizzaria Curitiba
                         </div>
                         <div class="col">
-                            Cidade
+                            Curitiba
                         </div>
                         <div class="col">
                             Data
@@ -36,16 +24,16 @@
                     </div>
                     <div class="row">
                         <input type="text" class="form-control modal-division col" id="name-filter"
-                            readonly="true" value="<%= @establishment.fantasy_name %>" />
+                            readonly="true" />
                         <input type="text" class="form-control modal-division col" id="name-filter"
-                            readonly="true" value="<%= @establishment.addresses.last.city %>" />
+                            readonly="true" />
                         <input type="date" class="form-control modal-division col" readonly="true"
-                            id="name-filter" value="<%= @establishment.updated_at %>"/>
+                            id="name-filter" />
                     </div>
                     <div class="form-group" style="margin-top: 10px">
                         <label for="observation-area">Observações</label>
                         <textarea class="form-control" id="observation-area" readonly="true"
-                            rows="8"><%= @establishment.observations.order(:created_at).last.content rescue 'nenhuma observação' %></textarea>
+                            rows="8"></textarea>
                     </div>
                 </div>
                 <div class="modal-footer">
