@@ -22,6 +22,9 @@ gem "roo", "~> 2.8.0"
 # A Scope & Engine based, clean, powerful, customizable and sophisticated paginator for Ruby webapps https://github.com/amatsuda/kaminari/…
 gem 'kaminari'
 
+# Makes http fun again!
+gem 'httparty'
+
 group :development do
   gem 'web-console', '>= 3.3.0'
 end

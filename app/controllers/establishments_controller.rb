@@ -125,18 +125,18 @@ class EstablishmentsController < ApplicationController
   end
 
   def filter_by_fantasy_name
-    @establishments = @establishments.where('establishments.fantasy_name LIKE ?', "%#{@fantasy_name}%")
+    @establishments = @establishments.where('establishments.fantasy_name ILIKE ?', "%#{@fantasy_name}%")
   end
 
   def filter_by_neighborhood
-    @establishments = @establishments.joins(:addresses).where('addresses.neighborhood LIKE ?', "%#{@address_neighborhood}%").group(:id)
+    @establishments = @establishments.joins(:addresses).where('addresses.neighborhood ILIKE ?', "%#{@address_neighborhood}%").group(:id)
   end
 
   def filter_by_email
-    @establishments = @establishments.joins(:emails).where('emails.email LIKE ?', "%#{@email}%").group(:id)
+    @establishments = @establishments.joins(:emails).where('emails.email ILIKE ?', "%#{@email}%").group(:id)
   end
 
   def filter_by_city
-    @establishments = @establishments.joins(:addresses).where('addresses.city LIKE ?', "%#{@address_city}%").group(:id)
+    @establishments = @establishments.joins(:addresses).where('addresses.city ILIKE ?', "%#{@address_city}%").group(:id)
   end
 end
