@@ -1,2 +1,138 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<!doctype html>
+<html lang="en">
+
+<head>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="./css/bootstrap.min.css">
+
+  <title>Data analytics</title>
+</head>
+
+<style type="text/css">
+  .body-div {
+    background-image: url("background.svg");
+    background-repeat: no-repeat;
+    background-size: 100%;
+  }
+
+  .panels {
+    border-radius: 12px;
+    background-color: #1b7abb;
+  }
+
+  .panel-initials {
+    opacity: 0.7;
+    margin-top: 250px;
+    height: 25%;
+  }
+
+  .button-search {
+    height: 7%;
+    width: 80%;
+    margin: 10px auto;
+    display: block;
+    color: white;
+    border: none;
+  }
+
+  .btn-circle {
+    padding: 6px 0px;
+    font-size: 12px;
+    line-height: 1.42857;
+    position: relative;
+    top: 20px;
+    width: 40px;
+    right: -10px;
+    height: 40px;
+    border-radius: 40px;
+    background-color: #1b7abb;
+    border: none;
+  }
+
+  .btn-icon {
+    line-height: 1;
+    font-size: 2em;
+    color: white;
+  }
+
+  .dropdown-inside {
+    width: 80%;
+    border-radius: 15px;
+    display: block;
+    margin: 7px auto;
+    background-color: white;
+    color: #1b7abb;
+  }
+
+  .dropdown-add {
+    top: 5px;
+  }
+</style>
+
+<body>
+  <div class="body-div d-flex justify-content-center align-items-center" style="width: 100vw; height: 100vh">
+    <div style="width:20%; height:100%;">
+      <div class="panels panel-initials">
+        <div class="dropdown dropdown-add">
+          <a class="btn dropdown-inside dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Estabelecimento
+          </a>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <a class="dropdown-item" href="#">Something else here</a>
+          </div>
+        </div>
+        <div class="dropdown dropdown-add">
+          <a class="btn dropdown-inside dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Cidade
+          </a>
+
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <a class="dropdown-item" href="#">Something else here</a>
+          </div>
+        </div>
+        <div class="dropdown dropdown-add">
+          <a class="btn dropdown-inside dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Nível
+          </a>
+
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <a class="dropdown-item" href="#">Something else here</a>
+          </div>
+        </div>
+      </div>
+      <button type="button" class="panels button-search">Pesquisar</button>
+    </div>
+    <button type="button" class="btn btn-primary btn-circle btn-lg" data-toggle="tooltip" data-placement="top"
+      title="Adicionar Estabelecimento">
+      <i class="material-icons btn-icon">add</i>
+    </button>
+  </div>
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="./js/bootstrap.min.js"></script>
+</body>
+<script>
+  $('[data-toggle="tooltip"]').tooltip()
+</script>
+
+</html>

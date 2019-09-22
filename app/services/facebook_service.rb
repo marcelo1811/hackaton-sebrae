@@ -2,12 +2,13 @@ class FacebookService
   def self.run_places_graph
     fields = ['id','checkins','engagement','is_verified','link','location','name','overall_star_rating','phone','rating_count','single_line_address','website']
     fields = fields.join(',')
-    token = "EAAFfAyix3dUBAPp8rdAkno6bo46ix3qmsuk6ijGQD6PMq6Wsq7KcVrrii47i5JvUa2YmqEZAa6oCO7L474drZAc0IBhcQXFOvN85G6wW7ozjmAZAkkxXIDnd64zChuSeZAeT6Mg2tfO9AqEQtj5Lua4cr0YhYkYYF4Ofk2RYAtKDMBEnILc0wrGknoZBpe5CAElmF0Oqv0AZDZD"
+    token = "EAAFfAyix3dUBAI7aZAiW4zHgVaEOjovhseZB2CRJWwlq8rB3X9ZBnDn47xdCfQChYE9d3dI95z0C0XvUhmESob6Rz63lRzwQWFFGUPQLSHlVCxZCMtB9Px30mvsumPHkKFmMG5RIgbdAoZA4XCH39PwPlrAZBPb3p903L92WRhzUmL3XmH2ytHJHNUM3ZAhIK1oxKCwdtGcwAZDZD"
 
     neighborhood_list = Address.distinct.pluck(:neighborhood)
-    neighborhood_list.each do |item|
+    neighborhood_list.reverse.each do |item|
       establishments = Establishment.joins(:addresses).where(addresses: { neighborhood: item }, facebook_updated_at: nil).where.not(addresses: { latitude: nil, longitude: nil })
 
+      next if establishments.blank?
       establishments.each do |establishment|
         lat_lng_str = establishment.addresses.last.latitude.gsub(',','.') + ',' + establishment.addresses.last.longitude.gsub(',','.')
         url = "https://graph.facebook.com/v3.2/search?type=place&center=#{lat_lng_str}&distance=1500&q=pizza&fields=#{fields}&limit=2&access_token=#{token}"
@@ -19,8 +20,6 @@ class FacebookService
         next if data.blank?
 
         data.each do |item|
-          next if FacebookInfo.find_by(facebook_id: item['id']).present?
-
           fb_info = FacebookInfo.create!(facebook_id: item['id'],
                                          checkins: item['checkins'],
                                          engagement: (item['engagement']['count'] rescue nil),
@@ -33,7 +32,7 @@ class FacebookService
                                          overall_star_rating: item['overall_star_rating'],
                                          website: item['website']
                                         )
-          establishment.update_attribute(facebook_updated_at: Time.now)
+          establishment.update_attribute(:facebook_updated_at, Time.now)
           location = item['location']
           next if location.blank?
 

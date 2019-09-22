@@ -90,6 +90,9 @@ class EstablishmentsController < ApplicationController
     FacebookService.run_places_graph
   end
 
+  def search
+  end
+
   private
 
   def establishment_params
