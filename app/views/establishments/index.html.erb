@@ -1,83 +1,4 @@
-<!-- <style type="text/css">
-  .btn-circle {
-    width: 30px;
-    height: 30px;
-    padding: 6px 0px;
-    border-radius: 15px;
-    text-align: center;
-    font-size: 12px;
-    line-height: 1.42857;
-  }
-
-  .btn-icon {
-    line-height: 0.7;
-  }
-</style>
-
-<body>
-  <div class="container ">
-    <div class="container">
-      <div class="row">
-        <%= simple_form_for(Establishment.new, method: :get, url: establishments_path) do |f| %>
-          <div class="form-row">
-            <%= f.input :fantasy_name, placeholder: 'Filtro de nome', label: false, input_html: { value: @fantasy_name } %>
-            <%= f.input :neighborhood, placeholder: 'Filtro de bairro', label: false, input_html: { value: @address_neighborhood } %>
-            <%= f.input :city, placeholder: 'Filtro de cidade', label: false, input_html: { value: @address_city } %>
-            <%= f.input :email, placeholder: 'Filtro de email', label: false, input_html: { value: @email } %>
-            <%= f.input :step, label: false, collection: Step.all, prompt: 'Filtro de nível' %>
-            <%= f.button :submit, style: 'display: none' %>
-          </div>
-        <% end %>
-        <div style="margin-left: 30px">
-          <%= link_to new_establishment_path do %>
-          <button type="button" class="btn btn-warning btn-circle btn-lg" data-toggle="tooltip" data-placement="top"
-            title="Adicionar Estabelecimento">
-            <i class="material-icons btn-icon">add</i>
-          </button>
-          <% end %>
-
-          <%= simple_form_for(Establishment.new, method: :post, url: establishments_import_csv_path, html: {multipart: true}) do |f| %>
-            <input type="file" name="establishment[file]" accept="application/xlsx">
-            <%= f.button :submit, 'enviar' %>
-          <% end %>
-        </div>
-      </div>
-    </div>
-    <div>exibindo <%= @results_count %> de <%= @total_count %></div>
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th scope="col">Nome Fantasia</th>
-          <th scope="col">Tipo</th>
-          <th scope="col">Rua</th>
-          <th scope="col">Número</th>
-          <th scope="col">Bairro</th>
-          <th scope="col">Cidade</th>
-          <th scope="col">Fone</th>
-          <th scope="col">E-mail</th>
-          <th scope="col">Whatsapp</th>
-          <th scope="col">Nível</th>
-          <th scope="col">Ações</th>
-        </tr>
-      </thead>
-      <tbody>
-        <%= render partial: "establishment", collection: @establishments %>
-      </tbody>
-    </table>
-  </div>
-
-  <% @pages.each do |page| %>
-    <%= link_to page, establishments_path(page: page) %>
-  <% end %>
-</body>
-<script>
-  $('[data-toggle="tooltip"]').tooltip()
-</script>
-
-</html>
- -->
-
- <!doctype html>
+<!doctype html>
 <html lang="en">
 
 
@@ -116,7 +37,7 @@
     .header {
         background-color: #1b7abb;
         color: white;
-        padding: 0;
+        padding: 0px;
     }
 
     .logo {
@@ -165,87 +86,144 @@
     }
 
 
-    td > .btn-circle {
+    td>.btn-circle {
         background-color: transparent;
         border: none;
     }
 
-    td > .btn-circle > i {
+    td>.btn-circle>i {
         color: black;
+    }
+
+    .modal-division {
+        margin-left: 6px;
+        margin-right: 6px;
+    }
+
+    form {
+        padding-top: 12px;
+        padding-bottom: 12px;
+    }
+
+    label {
+        vertical-align: top;
     }
 </style>
 
 <body>
     <div class="content-grouper">
-        <div class="row" style="margin: 0">
-            <div class="input-division">
-                Nome
+        <form class="form-inline" action='/establishments' method='get'>
+            <div class="form-group col-lg-2 col-md-4 col-sm-6">
+                <label for="filter-name">CNPJ</label>
+                <input type="text" class="form-control" id="filter-name" style="width:100%;">
             </div>
-            <div class="input-division">
-                Cidade
+            <div class="form-group col-lg-2 col-md-4 col-sm-6">
+                <label for="city-filter">Tipo</label>
+                <input type="text" class="form-control" id="city-filter" name="establishment[step]" style="width:100%;">
             </div>
-            <div class="input-division">
-                Bairro
+            <div class="form-group col-lg-2 col-md-4 col-sm-6">
+                <label for="neighborhood-filter">Nome</label>
+                <input type="text" class="form-control" id="neighborhood-filter" name="establishment[fantasy_name]" style="width:100%;">
             </div>
-            <div class="input-division">
-                E-mail
+            <div class="form-group col-lg-2 col-md-4 col-sm-6">
+                <label for="email-filter">Cidade</label>
+                <input type="text" class="form-control" id="email-filter" name="establishment[city]" style="width:100%;">
             </div>
-            <div class="input-division">
-                Nível
+            <div class="form-group col-lg-2 col-md-4 col-sm-6">
+                <label for="level-filter">Nível</label>
+                <select class="form-control" id="level-filter" style="width:100%;">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                </select>
             </div>
-        </div>
-        <div class="row content-table">
-
-            <input type="text" class="form-control input-division" id="name-filter" placeholder="Filtro de nome" />
-            <input type="text" class="form-control input-division" id="city-filter" placeholder="Filtro de cidade" />
-            <input type="text" class="form-control input-division" id="neighborhood-filter"
-                placeholder="Filtro de bairro" />
-            <input type="text" class="form-control input-division" id="email-filter" placeholder="Filtro de e-mail" />
-            <div class="dropdown" style="width: 12%" id="level-filter">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Filtro de nível
+            <div class="form-group col-lg-2 col-md-4 col-sm-6">
+                <button type="submit" class="btn btn-circle btn-lg ze-big-balls search-button"
+                    style="margin-right: 15px;" data-toggle="tooltip" data-placement="top" title="Pesquisar">
+                    <i class="material-icons btn-icon icon-of-big-balls">search</i>
                 </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="#">1</a>
-                    <a class="dropdown-item" href="#">2</a>
-                    <a class="dropdown-item" href="#">3</a>
-                    <a class="dropdown-item" href="#">4</a>
-                    <a class="dropdown-item" href="#">5</a>
-                </div>
+                <%= link_to new_establishment_path do %>
+                  <button type="button" class="btn btn-circle btn-lg ze-big-balls" data-toggle="tooltip"
+                      data-placement="top" title="Adicionar Estabelecimento" style="margin-right: 15px;">
+                      <i class="material-icons btn-icon icon-of-big-balls">add</i>
+                  </button>
+                <% end %>
+                <button type="button" class="btn btn-circle btn-lg ze-big-balls" data-toggle="tooltip"
+                    data-placement="top" title="Importar">
+                    <i class="material-icons btn-icon icon-of-big-balls">save_alt</i>
+                </button>
             </div>
-            <button type="button" class="btn btn-circle btn-lg ze-big-balls search-button" style="margin-right: 15px;" data-toggle="tooltip"
-                data-placement="top" title="Pesquisar">
-                <i class="material-icons btn-icon icon-of-big-balls">search</i>
-            </button>
-            <button type="button" class="btn btn-circle btn-lg ze-big-balls" data-toggle="tooltip" data-placement="top"
-                title="Adicionar Estabelecimento">
-                <i class="material-icons btn-icon icon-of-big-balls">add</i>
-            </button>
+        </form>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">CNPJ</th>
+                        <th scope="col">Nome Fantasia</th>
+                        <th scope="col">Tipo</th>
+                        <th scope="col">Rua</th>
+                        <th scope="col">Número</th>
+                        <th scope="col">Bairro</th>
+                        <th scope="col">Cidade</th>
+                        <th scope="col">Fone</th>
+                        <th scope="col">E-mail</th>
+                        <th scope="col">Whatsapp</th>
+                        <th scope="col">Nível</th>
+                        <th scope="col">Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                  <%= render partial: "establishment", collection: @establishments %>
+                </tbody>
+            </table>
         </div>
-
-
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th scope="col">CNPJ</th>
-                    <th scope="col">Nome Fantasia</th>
-                    <th scope="col">Tipo</th>
-                    <th scope="col">Rua</th>
-                    <th scope="col">Número</th>
-                    <th scope="col">Bairro</th>
-                    <th scope="col">Cidade</th>
-                    <th scope="col">Fone</th>
-                    <th scope="col">E-mail</th>
-                    <th scope="col">Whatsapp</th>
-                    <th scope="col">Nível</th>
-                    <th scope="col">Ações</th>
-                </tr>
-            </thead>
-            <tbody>
-              <%= render partial: "establishment", collection: @establishments %>
-            </tbody>
-        </table>
+        <!-- Modal -->
+        <div class="modal fade" id="observation-modal" tabindex="-1" role="dialog" aria-labelledby="observation-title"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <form>
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="observation-title">Observações</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col">
+                                    Nome Fantasia
+                                </div>
+                                <div class="col">
+                                    Cidade
+                                </div>
+                                <div class="col">
+                                    Data
+                                </div>
+                            </div>
+                            <div class="row">
+                                <input type="text" class="form-control modal-division col" id="name-filter"
+                                    readonly="true" />
+                                <input type="text" class="form-control modal-division col" id="name-filter"
+                                    readonly="true" />
+                                <input type="date" class="form-control modal-division col" id="name-filter"
+                                    readonly="true" />
+                            </div>
+                            <div class="form-group" style="margin-top: 10px">
+                                <label for="observation-area">Observações</label>
+                                <textarea class="form-control" id="observation-area" readonly="true"
+                                    rows="8"></textarea>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

@@ -15,16 +15,23 @@
     <i class="material-icons">stars</i>
   </td>
   <td>
-    <button type="button" class="btn btn-primary btn-circle" data-toggle="tooltip" data-placement="top"
-    title="Histórico">
-      <i class="material-icons btn-icon">history</i>
-    </button>
-    <button type="button" class="btn btn-primary btn-circle" data-toggle="tooltip" data-placement="top"
-    title="Observações">
-      <i class="material-icons btn-icon">comment</i>
-    </button>
+    <%= link_to establishment_path(establishment) do %>
+      <button type="button" class="btn btn-primary btn-circle" data-toggle="tooltip" data-placement="top"
+      title="Histórico">
+        <i class="material-icons btn-icon">history</i>
+      </button>
+    <% end %>
     <%= link_to edit_establishment_path(establishment) do %>
-      <i class="material-icons btn-icon text-dark">edit</i>
+      <button type="button" class="btn btn-primary btn-circle" data-toggle="tooltip" data-placement="top"
+      title="Observações">
+        <i class="material-icons btn-icon">comment</i>
+      </button>
+    <% end %>
+    <%= link_to edit_establishment_path(establishment) do %>
+      <button type="button" class="btn btn-primary btn-circle" data-toggle="tooltip" data-placement="top"
+      title="Editar">
+        <i class="material-icons btn-icon">edit</i>
+      </button>
     <% end %>
   </td>
 </tr>

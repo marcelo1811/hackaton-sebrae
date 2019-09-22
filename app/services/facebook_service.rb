@@ -2,7 +2,7 @@ class FacebookService
   def self.run_places_graph
     fields = ['id','checkins','engagement','is_verified','link','location','name','overall_star_rating','phone','rating_count','single_line_address','website']
     fields = fields.join(',')
-    token = "EAAFfAyix3dUBAI7aZAiW4zHgVaEOjovhseZB2CRJWwlq8rB3X9ZBnDn47xdCfQChYE9d3dI95z0C0XvUhmESob6Rz63lRzwQWFFGUPQLSHlVCxZCMtB9Px30mvsumPHkKFmMG5RIgbdAoZA4XCH39PwPlrAZBPb3p903L92WRhzUmL3XmH2ytHJHNUM3ZAhIK1oxKCwdtGcwAZDZD"
+    token = "EAAFfAyix3dUBAHxZBIQdRhrA2oSY2PlhEhYhElW0F8ijAuTLuhdZAeBn2rUD2UD9i1sGdcfVhCmG6sPXCXYn9lRznc8wEOZAHpl4qMKRMiQXF5XZBFaeNZCxD3G3L8fSt5CeB0gW7DR9elIJZA3wC28Ccmw5ZBhZBk2eKnAUVaCcGAw0UKgVsYeFBAKrGW7ZABC7gWetEFzyZArwZDZD"
 
     neighborhood_list = Address.distinct.pluck(:neighborhood)
     neighborhood_list.reverse.each do |item|

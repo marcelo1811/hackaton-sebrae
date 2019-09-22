@@ -14,7 +14,6 @@ class EstablishmentsController < ApplicationController
     filter_by_city if @address_city.present?
     @results_count = @establishments.length
     @establishments = @establishments.page(current_page)
-    # filter_by_step
   end
 
   def new
@@ -38,6 +37,17 @@ class EstablishmentsController < ApplicationController
   end
 
   def show
+    whatsapps = @establishment.whatsapps.order(:created_at)
+    phones = @establishment.phones.order(:created_at)
+    address = @establishment.addresses.order(:created_at)
+    email = @establishment.emails.order(:created_at)
+
+    @resources = []
+    @resources << whatsapps
+    @resources << phones
+    @resources << address
+    @resources << email
+    @resources = @resources.flatten.sort_by(&:created_at).reverse
   end
 
   def edit
@@ -46,9 +56,9 @@ class EstablishmentsController < ApplicationController
   def update
     @establishment.fantasy_name = @fantasy_name if @establishment.fantasy_name != @fantasy_name
     @establishment.emails.create(email: @email) if @establishment.emails.last.email != @email
-    @establishment.observations.create(content: @content) if (@establishment.observations.present? && @establishment.observations.last.content != @content) || @establishment.observations.blank?
-    @establishment.whatsapps.create(number: @whatsapp_number) if (@establishment.whatsapps.present? && @establishment.whatsapps.last.number != @whatsapp_number) || @establishment.whatsapps.blank?
-    @establishment.phones.create(number: @phone_number) if (@establishment.phones.present? && @establishment.phones.last.number != @phone_number) || @establishment.phones.blank?
+    @establishment.observations.create(content: @content) if (@establishment.observations.present? && @establishment.observations.order(:created_at).last.content != @content) || @establishment.observations.blank?
+    @establishment.whatsapps.create(number: @whatsapp_number) if (@establishment.whatsapps.present? && @establishment.whatsapps.order(:created_at).last.number != @whatsapp_number) || @establishment.whatsapps.blank?
+    @establishment.phones.create(number: @phone_number) if (@establishment.phones.present? && @establishment.phones.order(:created_at).last.number != @phone_number) || @establishment.phones.blank?
     @establishment.addresses.create(city: @address_city,
                                    neighborhood: @address_neighborhood,
                                    street: @address_street,
@@ -129,11 +139,11 @@ class EstablishmentsController < ApplicationController
   end
 
   def update_address?
-    return true if @establishment.addresses.blank?
-    return true if @establishment.addresses.last.city != @address_city
-    return true if @establishment.addresses.last.street != @address_street
-    return true if @establishment.addresses.last.neighborhood != @address_neighborhood
-    return true if @establishment.addresses.last.number != @addresses_number
+    return true if @establishment.addresses.order(:created_at).blank?
+    return true if @establishment.addresses.order(:created_at).last.city != @address_city
+    return true if @establishment.addresses.order(:created_at).last.street != @address_street
+    return true if @establishment.addresses.order(:created_at).last.neighborhood != @address_neighborhood
+    return true if @establishment.addresses.order(:created_at).last.number != @address_number.to_i
     false
   end
 
