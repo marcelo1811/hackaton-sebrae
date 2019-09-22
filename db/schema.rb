@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_22_055215) do
+ActiveRecord::Schema.define(version: 2019_09_22_070138) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,7 +43,7 @@ ActiveRecord::Schema.define(version: 2019_09_22_055215) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "cpf_cnpj"
-    t.datetime "facebook_update"
+    t.datetime "facebook_updated_at"
   end
 
   create_table "facebook_infos", force: :cascade do |t|
