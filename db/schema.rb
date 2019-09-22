@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_22_050526) do
+ActiveRecord::Schema.define(version: 2019_09_22_055215) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,36 @@ ActiveRecord::Schema.define(version: 2019_09_22_050526) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "cpf_cnpj"
+    t.datetime "facebook_update"
+  end
+
+  create_table "facebook_infos", force: :cascade do |t|
+    t.string "facebook_id"
+    t.boolean "is_verified"
+    t.string "name"
+    t.integer "overall_star_rating"
+    t.integer "engagement"
+    t.integer "checkins"
+    t.integer "rating_count"
+    t.string "single_line_address"
+    t.string "phone"
+    t.string "facebook_link"
+    t.string "website"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "facebook_locations", force: :cascade do |t|
+    t.bigint "facebook_info_id"
+    t.string "city"
+    t.float "latitude"
+    t.float "longitude"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "state"
+    t.string "street"
+    t.string "zip"
+    t.index ["facebook_info_id"], name: "index_facebook_locations_on_facebook_info_id"
   end
 
   create_table "observations", force: :cascade do |t|
@@ -91,6 +121,7 @@ ActiveRecord::Schema.define(version: 2019_09_22_050526) do
 
   add_foreign_key "addresses", "establishments"
   add_foreign_key "emails", "establishments"
+  add_foreign_key "facebook_locations", "facebook_infos"
   add_foreign_key "observations", "establishments"
   add_foreign_key "observations", "steps"
   add_foreign_key "phones", "establishments"

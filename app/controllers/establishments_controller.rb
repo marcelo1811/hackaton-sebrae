@@ -86,6 +86,15 @@ class EstablishmentsController < ApplicationController
     redirect_to establishments_path
   end
 
+  def facebook_script
+    fields = ['id','checkins','engagement','is_verified','link','location','name','overall_star_rating','phone','rating_count','single_line_address','website']
+    fields = fields.join(',')
+    token = "EAAFfAyix3dUBAFZCsLRYWF5qQVnbHv7kDJ5ZAHSDokxGDncDI59gb8raDQ1iVZCtmPZA4y6SZC3JnV4w0uWFNrmzmoWDusRzHZB4MZBDAkAnfG1yfjqyzxNMuQOAWJhyZCaDYHGbUUIfRW5SKRrcZBjQAHXTwZAPYcx3xIZB3r73wkTLpWrHdjgyTL0mcbTsDoB7aFJeQQN2ypkzQZDZD"
+
+    url = "https://graph.facebook.com/v3.2/search?type=place&center=-25.4234855,-49.3207829&distance=1500&q=pizza&fields=#{fields}&limit=2&access_token=#{token}"
+    response = HTTParty.get(url)
+  end
+
   private
 
   def establishment_params

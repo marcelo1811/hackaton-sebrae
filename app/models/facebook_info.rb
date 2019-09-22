@@ -1,0 +1,2 @@
+class FacebookInfo < ApplicationRecord
+end
