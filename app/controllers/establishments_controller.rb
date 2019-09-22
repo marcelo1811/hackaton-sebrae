@@ -3,7 +3,7 @@ class EstablishmentsController < ApplicationController
   before_action :set_params, only: [:update, :create, :index]
 
   def index
-    @establishments = Establishment.all
+    @establishments = Establishment.all.first(100)
     filter_by_fantasy_name if @fantasy_name.present?
     filter_by_neighborhood if @address_neighborhood.present?
     filter_by_email if @email.present?
@@ -52,6 +52,28 @@ class EstablishmentsController < ApplicationController
     redirect_to establishments_path
   end
 
+  def import_csv
+    file = establishment_params[:file]
+    sheet = Roo::Spreadsheet.open(file.path)
+    sheet = sheet.parse(headers: true, clean: true)
+    header = sheet.shift
+    sheet.each do |row|
+      establishment = Establishment.create!
+      establishment.fantasy_name = row['Nome Fantasia']
+      establishment.emails.create(email: row['Email'])
+      establishment.observations.create(content: 'Importado da planilha')
+      establishment.whatsapps.create(number: row['Celular'])
+      establishment.phones.create(number: row['Telefone'])
+      establishment.addresses.create(city: row['Cidade'],
+                                     neighborhood: row['Bairro'],
+                                     street: row['Endereço'],
+                                     number: row['Número']
+                                    )
+      establishment.save!
+    end
+    redirect_to establishments_path
+  end
+
   private
 
   def establishment_params
@@ -65,7 +87,8 @@ class EstablishmentsController < ApplicationController
                                           :neighborhood,
                                           :street,
                                           :address_number,
-                                          :step
+                                          :step,
+                                          :file
                                          )
   end
 

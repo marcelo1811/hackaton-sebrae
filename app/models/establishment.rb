@@ -8,6 +8,7 @@ class Establishment < ApplicationRecord
   attr_accessor :neighborhood
   attr_accessor :street
   attr_accessor :address_number
+  attr_accessor :file
 
   has_many :whatsapps
   has_many :observations

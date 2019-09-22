@@ -143,6 +143,10 @@ GEM
     responders (3.0.0)
       actionpack (>= 5.0)
       railties (>= 5.0)
+    roo (2.8.2)
+      nokogiri (~> 1)
+      rubyzip (>= 1.2.1, < 2.0.0)
+    rubyzip (1.2.4)
     sassc (2.2.1)
       ffi (~> 1.9)
     sassc-rails (2.1.2)
@@ -204,6 +208,7 @@ DEPENDENCIES
   puma
   rails (= 5.2.3)
   redis
+  roo (~> 2.8.0)
   sassc-rails
   simple_form
   spring

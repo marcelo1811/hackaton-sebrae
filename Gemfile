@@ -16,6 +16,9 @@ gem 'simple_form'
 gem 'uglifier'
 gem 'webpacker'
 
+# Roo provides an interface to spreadsheets of several sorts.
+gem "roo", "~> 2.8.0"
+
 group :development do
   gem 'web-console', '>= 3.3.0'
 end

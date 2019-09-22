@@ -35,6 +35,11 @@
             <i class="material-icons btn-icon">add</i>
           </button>
           <% end %>
+
+          <%= simple_form_for(Establishment.new, method: :post, url: establishments_import_csv_path, html: {multipart: true}) do |f| %>
+            <input type="file" name="establishment[file]" accept="application/xlsx">
+            <%= f.button :submit, 'enviar' %>
+          <% end %>
         </div>
       </div>
     </div>
